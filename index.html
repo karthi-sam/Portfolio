@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#fdf6ec;
+    --bg:#fff;
     --bg-alt:#f7ece0;
     --ink:#241c15;
     --ink-soft:#75695c;
@@ -62,7 +62,8 @@
   @media (max-width:640px){ main{ padding:0 16px 80px; } header{ padding:20px 16px 0; } }
 
   /* ---------- Hero ---------- */
-  .hero{ padding:60px 0 50px; max-width:720px; }
+  .hero{ display:grid; grid-template-columns:1.2fr 1fr; gap:40px; padding:60px 0 50px; max-width:none; align-items:center; }
+  @media (max-width:900px){ .hero{ grid-template-columns:1fr; } }
   .hi{ font-family:'Poppins', sans-serif; font-weight:600; font-size:1.3rem; margin-bottom:4px; }
   h1.hello{
     font-weight:800; font-size:clamp(2.4rem, 5.5vw, 3.6rem); margin:0 0 10px; line-height:1.05;
@@ -77,6 +78,14 @@
   }
   .btn-solid{ background:var(--orange); color:#fff; }
   .btn-outline{ background:transparent; color:var(--ink); border:1.5px solid var(--ink); }
+
+  .hero-art{
+     border-radius:28px; padding:16px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-art img{
+    width:100%; max-width:320px; border-radius:20px; display:block;
+  }
 
   /* ---------- Section shell ---------- */
   section.block-section{ padding:56px 0 0; scroll-margin-top:30px; }
@@ -204,13 +213,16 @@
   <section id="about" class="hero">
     <div class="hero-copy">
       <div class="hi">Hi, I'm</div>
-      <h1 class="hello">Karthikeyan <span class="accent">T.</span></h1>
+      <h1 class="hello">Karthikeyan . <span class="accent">T</span></h1>
       <div class="role">Commerce Postgraduate &amp; Aspiring Educator</div>
       <p class="lead">Commerce postgraduate with a strong academic background in Accountancy, Finance, and Business Studies, seeking an opportunity to apply analytical thinking, reporting, and communication skills in a structured, compliance-driven professional environment that values accuracy, data-driven decision-making, and institutional growth.</p>
       <div class="hero-actions">
         <a class="btn btn-solid" href="#projects">View My Work</a>
         <a class="btn btn-outline" href="#contact">Get In Touch</a>
       </div>
+    </div>
+    <div class="hero-art">
+      <img src="photo.png" alt="Karthikeyan T.">
     </div>
   </section>
 
@@ -280,14 +292,22 @@
         <span style="color:var(--ink-soft);">Awarded by Chennai Metro Rail Limited (CMRL)</span>
       </div>
     </div>
+  </section>
+
+    <!-- EDUCATION -->
     <div class="cert">
-      <div class="seal">EDU.</div>
+      <div class="seal">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3L1 8l11 5 9-4.09V17h2V8L12 3z" fill="#fff"/>
+          <path d="M5 10.18V14c0 2.21 3.13 4 7 4s7-1.79 7-4v-3.82l-7 3.18-7-3.18z" fill="#fff" opacity=".85"/>
+        </svg>
+      </div>
       <div>
         <strong>Education</strong><br>
-        <span style="color:var(--ink-soft);">Master of Commerce (MCom), Business Data Science, Bachelor of Commerce (BCom), Corporate Secretaryship </span>
+        <span style="color:var(--ink-soft);">Master of Commerce (MCom), Business Data Science<br>Bachelor of Commerce (BCom), Corporate Secretaryship</span>
       </div>
     </div>
-  </section>
+
 
   <!-- EXPERIENCE -->
   <section id="experience" class="block-section">
@@ -405,6 +425,8 @@
 
     </div>
   </section>
+
+
 
   <!-- CONTACT -->
   <section id="contact" class="block-section">
