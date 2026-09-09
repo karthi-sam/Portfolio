@@ -150,7 +150,6 @@
   .proj{
     background:var(--card); border:1px solid var(--line); border-radius:20px; overflow:hidden; display:flex; flex-direction:column;
     cursor:pointer; transition:transform .15s ease, box-shadow .15s ease;
-    text-decoration:none; color:inherit;
   }
   .proj:hover{ transform:translateY(-3px); box-shadow:0 10px 24px rgba(36,28,21,.08); }
   .proj .thumb{
@@ -193,6 +192,61 @@
   .contact-list button:hover{ background:rgba(255,255,255,.15); }
 
   footer.credit{ text-align:center; padding:26px 0 10px; color:var(--ink-soft); font-size:.8rem; }
+
+  /* ---------- Project detail modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(34,27,20,.55);
+    display:none; align-items:center; justify-content:center; padding:20px; z-index:100;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-card{
+    background:var(--card); border-radius:22px; max-width:560px; width:100%;
+    padding:32px 34px; position:relative; max-height:85vh; overflow-y:auto;
+  }
+  .modal-card .modal-thumb{
+    background:var(--bg-alt); border-radius:14px; padding:8px 16px; display:inline-block;
+    font-family:'Poppins', sans-serif; font-weight:800; color:var(--orange-dark); font-size:1.05rem; margin-bottom:16px;
+  }
+  .modal-card h3{ margin:0 0 12px; font-size:1.3rem; }
+  .modal-card p{ color:var(--ink-soft); margin:0 0 10px; }
+  .modal-card ul{ margin:0; padding-left:20px; color:var(--ink-soft); }
+  .modal-card li{ margin-bottom:8px; }
+  .modal-card h4{ margin:18px 0 8px; font-size:1rem; color:var(--ink); }
+  .modal-links{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+  .modal-links a{
+    display:inline-flex; align-items:center; gap:6px; text-decoration:none;
+    background:var(--bg-alt); color:var(--ink); font-weight:600; font-size:.82rem;
+    padding:9px 16px; border-radius:999px; border:1px solid var(--line);
+  }
+  .modal-links a:hover{ border-color:var(--orange); color:var(--orange-dark); }
+  .modal-gallery{
+    position:relative; margin:18px 0; background:var(--bg-alt);
+    border-radius:14px; overflow:hidden; aspect-ratio:16/10;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .modal-gallery img{
+    width:100%; height:100%; object-fit:contain; display:block;
+  }
+  .gallery-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:38px; height:38px; border-radius:50%; border:none;
+    background:rgba(34,27,20,.55); color:#fff; font-size:1.1rem;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .gallery-arrow:hover{ background:rgba(34,27,20,.8); }
+  .gallery-arrow.prev{ left:10px; }
+  .gallery-arrow.next{ right:10px; }
+  .gallery-dots{ display:flex; justify-content:center; gap:6px; margin-top:10px; }
+  .gallery-dots span{
+    width:7px; height:7px; border-radius:50%; background:var(--line); cursor:pointer;
+  }
+  .gallery-dots span.active{ background:var(--orange); }
+  .modal-close{
+    position:absolute; top:20px; right:20px; width:34px; height:34px; border-radius:50%;
+    border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-size:1rem;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .modal-close:hover{ background:var(--line); }
 
   :focus-visible{ outline:2px solid var(--orange); outline-offset:2px; }
 </style>
@@ -261,46 +315,46 @@
       <div class="sub">Assignments &amp; work</div>
     </div>
     <div class="projects">
-      <a class="proj" href="projects.html#cmrl-complaint">
+      <div class="proj" data-project="cmrl-complaint">
         <div class="thumb">01</div>
         <div class="body">
           <h3>CMRL Complaint Workflow Project</h3>
           <p>Analyzed and cleaned historical complaint data and supported workflow planning for a web-based complaint management application.</p>
           <div class="view-more">View details →</div>
         </div>
-      </a>
-      <a class="proj" href="projects.html#cameo-training">
+      </div>
+      <div class="proj" data-project="cameo-training">
         <div class="thumb">02</div>
         <div class="body">
           <h3>Institutional Training Report — Cameo Corporate Services</h3>
           <p>A report documenting institutional training completed at Cameo Corporate Services Limited.</p>
           <div class="view-more">View details →</div>
         </div>
-      </a>
-      <a class="proj" href="projects.html#hero-motocorp">
+      </div>
+      <div class="proj" data-project="hero-motocorp">
         <div class="thumb">03</div>
         <div class="body">
           <h3>Hero MotoCorp Financial Analysis &amp; Visualization</h3>
           <p>Financial analysis and data visualization report built on Hero MotoCorp's corporate financials.</p>
           <div class="view-more">View details →</div>
         </div>
-      </a>
-      <a class="proj" href="projects.html#cmrl-passenger">
+      </div>
+      <div class="proj" data-project="cmrl-passenger">
         <div class="thumb">04</div>
         <div class="body">
           <h3>CMRL Passenger Prediction, Phase 2</h3>
           <p>Passenger prediction analysis for Chennai Metro Rail Limited, phase two.</p>
           <div class="view-more">View details →</div>
         </div>
-      </a>
-      <a class="proj" href="projects.html#powerbi-dashboard">
+      </div>
+      <div class="proj" data-project="powerbi-dashboard">
         <div class="thumb">05</div>
         <div class="body">
           <h3>Contoso Sales Performance Dashboard</h3>
           <p>A set of Power BI dashboards analyzing store, product, and regional sales performance.</p>
           <div class="view-more">View details →</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="cert">
@@ -473,6 +527,16 @@
 
 </main>
 
+<!-- PROJECT DETAIL MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-thumb" id="modalThumb">01</div>
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
 <script>
   const navLinks = document.querySelectorAll('nav a');
   const sections = document.querySelectorAll('main section[id]');
@@ -496,6 +560,199 @@
     });
   }
 
+  // ---- Project detail data ----
+  // To add your GitHub repo / Word doc links: fill in the "url" values below.
+  // Leave a url as '' (empty) and that button simply won't be shown.
+  const projectDetails = {
+    'cmrl-complaint': {
+      thumb: '01',
+      title: 'CMRL Complaint Workflow Project',
+      html: `
+        <p>Built during the Customer Complaint Analyst internship at Chennai Metro Rail Limited. The project analyzed and cleaned historical complaint data, then supported workflow planning for a web-based complaint management application.</p>
+        <p>What the workflow does:</p>
+        <ul>
+          <li>Pulls incoming customer complaints in from email automatically.</li>
+          <li>Imports them into a web-based complaint management system.</li>
+          <li>Segregates each complaint by urgency level — Urgent, Important, or Normal.</li>
+          <li>Routes the complaint to the relevant department for resolution based on that level.</li>
+          <li>Tracks the resolution back to the customer complaint department and closes the loop with the customer.</li>
+        </ul>
+      `,
+      links: [
+        { label: 'View on GitHub', url: '' },
+        { label: 'View Report (Word)', url: '' }
+      ]
+    },
+    'cameo-training': {
+      thumb: '02',
+      title: 'Institutional Training Report — Cameo Corporate Services',
+      html: `
+        <p>A report documenting the institutional training completed during the Data Entry Intern role at Cameo Corporate Services Limited.</p>
+        <ul>
+          <li>Covers the training received on managing, organizing, and analyzing financial data.</li>
+          <li>Uses MS Excel as the primary tool for data handling and record-keeping.</li>
+          <li>Summarizes the practical exposure gained to corporate data workflows during the internship.</li>
+        </ul>
+      `,
+      links: [
+        { label: 'View on GitHub', url: '' },
+        { label: 'View Report (Word)', url: '' }
+      ]
+    },
+    'hero-motocorp': {
+      thumb: '03',
+      title: "Hero MotoCorp Financial Analysis & Visualization",
+      html: `
+        <p>Completed during the Finance Analyst Intern role at Dax Ellis. An in-depth financial analysis of Hero MotoCorp Ltd, examining liquidity, profitability, debt management, capital structure, and working capital trends from 2019 to 2023 using Excel and data visualization.</p>
+        <p>Hero MotoCorp, the world's largest manufacturer of two-wheelers, has shown resilience and adaptability in a fast-changing automotive sector. This analysis explores the company's financial health through key ratios and industry benchmarks, offering insight into its stability, operational efficiency, and profitability.</p>
+
+        <h4>Liquidity Ratios</h4>
+        <ul>
+          <li>Current Ratio, Quick Ratio, Cash Ratio, Net Working Capital Ratio</li>
+          <li>Trend: fluctuations with a decline in liquidity in 2023; a notable peak in working capital in 2022.</li>
+        </ul>
+
+        <h4>Working Capital Analysis</h4>
+        <ul>
+          <li>Year-on-year breakdown from 2019 to 2023, compared against industry benchmarks.</li>
+          <li>A slight downward trend in 2023 signals a need to monitor the asset-liability balance.</li>
+        </ul>
+
+        <h4>Debt Management</h4>
+        <ul>
+          <li>Debt to Total Assets Ratio, Interest Coverage Ratio, Debt Service Coverage Ratio (DSCR)</li>
+          <li>Showed stable leverage, strong interest coverage, and a sustainable debt structure.</li>
+        </ul>
+
+        <h4>Profitability Ratios</h4>
+        <ul>
+          <li>Gross Profit Margin, Net Profit Margin, Return on Equity (ROE), Return on Assets (ROA)</li>
+          <li>Despite a declining trend, metrics remained higher than industry averages.</li>
+        </ul>
+
+        <h4>Capital Ratios</h4>
+        <ul>
+          <li>Debt to Equity Ratio, Return on Invested Capital (ROIC)</li>
+          <li>A stable capital structure with moderate leverage, and effective use of capital despite a slight ROIC decline.</li>
+        </ul>
+
+        <h4>Tools &amp; Skills Applied</h4>
+        <ul>
+          <li>Microsoft Excel — pivot tables, Power Query, charting, and financial ratio formulas.</li>
+          <li>Power BI — for dynamic visualizations.</li>
+          <li>Accounting &amp; finance concepts — ratio interpretation, benchmarking, and trend analysis.</li>
+        </ul>
+
+        <h4>Key Insights</h4>
+        <ul>
+          <li>Hero MotoCorp maintained a healthy capital structure and strong liquidity until 2022, with signs of pressure in 2023.</li>
+          <li>The company's profitability outperformed industry benchmarks across most years.</li>
+          <li>Debt usage remains strategic and sustainable, with robust interest coverage.</li>
+          <li>Capital structure is conservative, allowing flexibility for future investments.</li>
+        </ul>
+      `,
+      links: [
+        { label: 'View on GitHub', url: 'https://github.com/karthi-sam/Financial-Analysis-Report' },
+        { label: 'View Report (Word)', url: 'https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fkarthi-sam%2FFinancial-Analysis-Report%2Frefs%2Fheads%2Fmain%2FFinancial%2520Report.docx&wdOrigin=BROWSELINK' },
+        { label: 'View Data', url: 'https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fkarthi-sam%2FFinancial-Analysis-Report%2Frefs%2Fheads%2Fmain%2Fmain%2520project%2520internship.xlsx&wdOrigin=BROWSELINK' }
+      ]
+    },
+    'cmrl-passenger': {
+      thumb: '04',
+      title: 'CMRL Passenger Prediction, Phase 2',
+      html: `
+        <p>A follow-on piece of work connected to the Chennai Metro Rail Limited internship, focused on passenger prediction analysis for CMRL, phase two.</p>
+        <ul>
+          <li>Builds on the complaint and operations data familiarity gained during the CMRL internship.</li>
+          <li>Focuses specifically on predicting passenger patterns as part of the phase 2 scope.</li>
+        </ul>
+      `,
+      links: [
+        { label: 'View on GitHub', url: 'https://github.com/karthi-sam/passenger-flow-Prediction-' },
+        { label: 'View Report (Word)', url: '' }
+      ]
+    },
+    'powerbi-dashboard': {
+      thumb: '05',
+      title: 'Contoso Sales Performance Dashboard',
+      html: `
+        <p>A set of Power BI dashboards built to analyze Contoso's sales performance across stores, product categories, and regions.</p>
+        <ul>
+          <li>Store-level sales analysis with filters for store name, quarter, and year.</li>
+          <li>Overall sales report covering total sales, quantity sold, COGS, net profit, and year-to-date sales.</li>
+          <li>Profit analysis by city and product category, including profit margin trends.</li>
+          <li>Country-level sales analysis with breakdowns by continent, brand, and product name.</li>
+        </ul>
+      `,
+      images: ['dashboard-1.png', 'dashboard-2.png', 'dashboard-3.png', 'dashboard-4.png'],
+      links: []
+    }
+  };
+
+  const overlay = document.getElementById('modalOverlay');
+  const modalThumb = document.getElementById('modalThumb');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
+  const modalClose = document.getElementById('modalClose');
+
+  document.querySelectorAll('.proj').forEach(card => {
+    card.addEventListener('click', () => {
+      const key = card.getAttribute('data-project');
+      const detail = projectDetails[key];
+      if(!detail) return;
+      modalThumb.textContent = detail.thumb;
+      modalTitle.textContent = detail.title;
+      modalBody.innerHTML = detail.html;
+
+      if(detail.images && detail.images.length){
+        let current = 0;
+        const gallery = document.createElement('div');
+        gallery.className = 'modal-gallery';
+        gallery.innerHTML = `
+          <button class="gallery-arrow prev" aria-label="Previous image">‹</button>
+          <img src="${detail.images[0]}" alt="${detail.title} screenshot 1">
+          <button class="gallery-arrow next" aria-label="Next image">›</button>
+        `;
+        modalBody.appendChild(gallery);
+
+        const dots = document.createElement('div');
+        dots.className = 'gallery-dots';
+        dots.innerHTML = detail.images.map((_, i) => `<span data-i="${i}" class="${i === 0 ? 'active' : ''}"></span>`).join('');
+        modalBody.appendChild(dots);
+
+        const img = gallery.querySelector('img');
+        const dotEls = dots.querySelectorAll('span');
+
+        function showImage(i){
+          current = (i + detail.images.length) % detail.images.length;
+          img.src = detail.images[current];
+          img.alt = `${detail.title} screenshot ${current + 1}`;
+          dotEls.forEach((d, idx) => d.classList.toggle('active', idx === current));
+        }
+
+        gallery.querySelector('.prev').addEventListener('click', () => showImage(current - 1));
+        gallery.querySelector('.next').addEventListener('click', () => showImage(current + 1));
+        dotEls.forEach(d => d.addEventListener('click', () => showImage(Number(d.dataset.i))));
+      }
+
+      const validLinks = (detail.links || []).filter(l => l.url && l.url.trim() !== '');
+      if(validLinks.length){
+        const linksWrap = document.createElement('div');
+        linksWrap.className = 'modal-links';
+        linksWrap.innerHTML = validLinks.map(l =>
+          `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`
+        ).join('');
+        modalBody.appendChild(linksWrap);
+      }
+
+      overlay.classList.add('open');
+    });
+  });
+
+  function closeModal(){ overlay.classList.remove('open'); }
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
 </script>
 
 </body>
